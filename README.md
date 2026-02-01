@@ -4,17 +4,20 @@ A Svelte + TypeScript web application that generates bird songs using probabilis
 
 ## Features
 
-- **Three Unique Birds**: Simple Sparrow, Melodic Nightingale, and Rhythmic Woodpecker
+- **Four Unique Birds**: Simple Sparrow, Melodic Nightingale, Rhythmic Woodpecker, and Cascading Finch
+- **Multi-Note Nodes**: Each graph node can play multiple notes in sequence for richer musical patterns
+- **Human-Readable Notation**: Use musical note names (C5, D5, E5) instead of frequencies
 - **Probabilistic Playback**: Each performance generates a unique variation
 - **Web Audio API**: Native browser audio synthesis with smooth envelopes
 - **Clean UI**: Simple, responsive interface with real-time playback controls
 
 ## How It Works
 
-1. **Graph Nodes**: Each node represents a musical note with frequency, duration, and waveform
+1. **Graph Nodes**: Each node contains an array of musical notes to play in sequence
 2. **Weighted Edges**: Transitions between nodes have probability weights
 3. **Graph Walking**: Algorithm traverses the graph making weighted random selections
 4. **Audio Playback**: Web Audio API synthesizes notes with attack/release envelopes
+5. **Musical Patterns**: Nodes can express arpeggios, trills, runs, and complex phrases
 
 ## Getting Started
 
@@ -40,6 +43,30 @@ npm run build
 
 The production build will be in the `dist/` directory.
 
+## Deployment
+
+### GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages via GitHub Actions.
+
+**Setup Instructions:**
+
+1. Push your repository to GitHub
+2. Go to repository **Settings** → **Pages**
+3. Under **Build and deployment**, select:
+   - **Source**: GitHub Actions
+4. Push to the `master` branch to trigger deployment
+5. Your site will be available at `https://<username>.github.io/<repository-name>/`
+
+The workflow automatically:
+- Builds the project on every push to `master`
+- Configures the correct base path for GitHub Pages
+- Deploys to the `gh-pages` environment
+
+**Manual Deployment:**
+
+You can also trigger deployment manually from the **Actions** tab by running the "Deploy to GitHub Pages" workflow.
+
 ## Project Structure
 
 ```
@@ -51,6 +78,7 @@ src/
 │   │   ├── GraphWalker.ts    # Graph traversal with probabilistic selection
 │   │   └── AudioEngine.ts    # Web Audio API wrapper
 │   ├── data/
+│   │   ├── notes.ts          # Musical note constants (C3-B6)
 │   │   └── birdSongs.ts      # Predefined bird song graphs
 │   └── components/
 │       ├── BirdSelector.svelte
