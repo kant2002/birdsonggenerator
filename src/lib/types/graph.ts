@@ -28,8 +28,8 @@ export interface GraphEdge {
 export interface GraphNode {
   /** Unique identifier for the node */
   id: string;
-  /** Musical note parameters */
-  note: NoteParams;
+  /** Musical notes to play in sequence */
+  notes: NoteParams[];
   /** Weighted transitions to other nodes */
   transitions: GraphEdge[];
 }

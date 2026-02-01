@@ -28,7 +28,9 @@
       // Start walking the graph
       await graphWalker.start(async (node) => {
         if (audioEngine) {
-          await audioEngine.playNote(node.note);
+          for (const note of node.notes) {
+            await audioEngine.playNote(note);
+          }
         }
       });
 
