@@ -129,3 +129,29 @@ export const withVolume = (baseNote: NoteParams, volume: number): NoteParams => 
   ...baseNote,
   volume
 });
+
+import aUrl from '../../assets/syllables/a.wav';
+import bUrl from '../../assets/syllables/b.wav';
+import cUrl from '../../assets/syllables/c.wav';
+import dUrl from '../../assets/syllables/d.wav';
+import eUrl from '../../assets/syllables/e.wav';
+import fUrl from '../../assets/syllables/f.wav';
+import iUrl from '../../assets/syllables/i.wav';
+import sUrl from '../../assets/syllables/s.wav';
+
+/**
+ * Pre-recorded syllable samples loaded from `src/assets/syllables/`.
+ * `duration: 0` means "play the whole sample"; use `note(Syllables.a, 0.2)`
+ * to truncate, or `withVolume(Syllables.a, 0.5)` to attenuate.
+ * `withWaveform()` has no effect on samples.
+ */
+export const Syllables = {
+  a: { sample: aUrl, frequency: 0, duration: 0 },
+  b: { sample: bUrl, frequency: 0, duration: 0 },
+  c: { sample: cUrl, frequency: 0, duration: 0 },
+  d: { sample: dUrl, frequency: 0, duration: 0 },
+  e: { sample: eUrl, frequency: 0, duration: 0 },
+  f: { sample: fUrl, frequency: 0, duration: 0 },
+  i: { sample: iUrl, frequency: 0, duration: 0 },
+  s: { sample: sUrl, frequency: 0, duration: 0 },
+} as const satisfies Record<string, NoteParams>;

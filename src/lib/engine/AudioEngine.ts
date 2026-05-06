@@ -6,6 +6,7 @@ import type { NoteParams } from '../types/graph';
 export class AudioEngine {
   private audioContext: AudioContext | null = null;
   private masterGain: GainNode | null = null;
+  private sampleCache = new Map<string, Promise<AudioBuffer>>();
 
   /**
    * Initialize the audio context (must be called after user interaction)
@@ -27,6 +28,11 @@ export class AudioEngine {
   async playNote(note: NoteParams): Promise<void> {
     if (!this.audioContext || !this.masterGain) {
       throw new Error('AudioEngine not initialized');
+    }
+
+    if (note.sample) {
+      await this.playSample(note);
+      return;
     }
 
     // Handle rests (silent notes)
@@ -70,6 +76,59 @@ export class AudioEngine {
     // Cleanup
     oscillator.disconnect();
     gainNode.disconnect();
+  }
+
+  /**
+   * Fetch and decode a WAV (or any browser-decodable) sample, memoized by URL.
+   * Concurrent requests dedupe on the in-flight Promise.
+   */
+  private loadSample(url: string): Promise<AudioBuffer> {
+    const cached = this.sampleCache.get(url);
+    if (cached) return cached;
+
+    const ctx = this.audioContext!;
+    const promise = fetch(url)
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to fetch sample ${url}: ${res.status}`);
+        return res.arrayBuffer();
+      })
+      .then(buf => ctx.decodeAudioData(buf));
+    this.sampleCache.set(url, promise);
+    return promise;
+  }
+
+  /**
+   * Play a sample-based note via AudioBufferSourceNode.
+   * `note.duration === 0` plays the whole buffer; positive values truncate.
+   */
+  private async playSample(note: NoteParams): Promise<void> {
+    const ctx = this.audioContext!;
+    const buffer = await this.loadSample(note.sample!);
+
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+
+    const gainNode = ctx.createGain();
+    gainNode.gain.value = note.volume ?? 0.3;
+
+    source.connect(gainNode);
+    gainNode.connect(this.masterGain!);
+
+    const playSeconds = note.duration > 0
+      ? Math.min(note.duration, buffer.duration)
+      : buffer.duration;
+
+    await new Promise<void>(resolve => {
+      source.onended = () => {
+        source.disconnect();
+        gainNode.disconnect();
+        resolve();
+      };
+      source.start();
+      if (note.duration > 0 && note.duration < buffer.duration) {
+        source.stop(ctx.currentTime + playSeconds);
+      }
+    });
   }
 
   /**

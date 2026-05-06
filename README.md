@@ -11,6 +11,14 @@ A Svelte + TypeScript web application that generates bird songs using probabilis
 - **Web Audio API**: Native browser audio synthesis with smooth envelopes
 - **Clean UI**: Simple, responsive interface with real-time playback controls
 
+## Data
+
+- [BirdDB / Koumura Dataset (Figshare)](https://figshare.com/articles/media/BirdsongRecognition/3470165): This is the definitive dataset of Bengalese Finch songs where every single "note" is manually labeled—essential for building a state machine.
+- [Bengalese Finch Song Repository (VocalPy)](https://www.vocalpy.org/bfsongrepo/): Another excellent, documented version of the Koumura data designed specifically for testing machine learning algorithms. 
+- Japanese Tit Compositional Syntax (Nature): The core scientific paper proving that certain birds use an ordering rule (grammar) to combine notes (ABC = danger, D = approach).
+https://pmc.ncbi.nlm.nih.gov/articles/PMC3871373/
+
+
 ## How It Works
 
 1. **Graph Nodes**: Each node contains an array of musical notes to play in sequence
@@ -56,7 +64,7 @@ This project is configured for automatic deployment to GitHub Pages via GitHub A
 3. Under **Build and deployment**, select:
    - **Source**: GitHub Actions
 4. Push to the `master` branch to trigger deployment
-5. Your site will be available at `https://<username>.github.io/<repository-name>/`
+5. Your site will be available at `https://kant2002.github.io/birdsongenerator/`
 
 The workflow automatically:
 - Builds the project on every push to `master`

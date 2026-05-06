@@ -4,6 +4,7 @@ import {
   C4, D4, E4, F4, G4, A4, B4,
   C5, D5, E5, F5, G5, A5, B5,
   C6, D6, E6, F6, G6, A6, B6,
+  Syllables,
   REST,
   note,
   withWaveform,
@@ -245,11 +246,93 @@ const cascadingFinch: BirdSong = {
 };
 
 /**
+ * Cascading Finch - Demonstrates rich multi-note cascades
+ * Features descending runs and complex note sequences
+ */
+const realFinch: BirdSong = {
+  name: 'Real Finch',
+  description: 'Flowing cascades of notes in rapid succession',
+  startNodeId: 'start',
+  nodes: [
+    {
+      id: 'start',
+      notes: [note(REST, 0.15)], // Four-note descending run
+      transitions: [
+        { targetNodeId: 'a', weight: 0.36 },
+        { targetNodeId: 'i', weight: 0.58 }
+      ]
+    },
+    {
+      id: 'a',
+      notes: [Syllables.a], // Pause on the landing note
+      transitions: [
+        { targetNodeId: 'a', weight: 0.31 },
+        { targetNodeId: 'b', weight: 0.69 },
+      ]
+    },
+    {
+      id: 'b',
+      notes: [Syllables.b], // Trill pattern
+      transitions: [
+        { targetNodeId: 'a', weight: 0.10 },
+        { targetNodeId: 'c', weight: 0.90 },
+      ]
+    },
+    {
+      id: 'c',
+      notes: [Syllables.c], // Note-rest-note
+      transitions: [
+        { targetNodeId: 'd', weight: 0.65 },
+        { targetNodeId: 'f', weight: 0.35 },
+      ]
+    },
+    {
+      id: 'd',
+      notes: [Syllables.d], // Ascending to high finish
+      transitions: [
+        { targetNodeId: 'e', weight: 1 },
+      ]
+    },
+    {
+      id: 'e',
+      notes: [Syllables.e], // Ascending to high finish
+      transitions: [
+        { targetNodeId: 'a', weight: 0.28 },
+        { targetNodeId: 'c', weight: 0.37 },
+        { targetNodeId: 'g', weight: 0.35 },
+      ]
+    },
+    {
+      id: 'f',
+      notes: [Syllables.f], // Ascending to high finish
+      transitions: [
+        { targetNodeId: 'a', weight: 0.11 },
+        { targetNodeId: 'b', weight: 0.39 },
+        { targetNodeId: 'e', weight: 0.50 },
+      ]
+    },
+    {
+      id: 'g',
+      notes: [Syllables.i], // Ascending to high finish
+      transitions: [
+        { targetNodeId: 'f', weight: 1 },
+      ]
+    },
+    {
+      id: 'end',
+      notes: [note(REST, 0.15)],
+      transitions: [] // End
+    }
+  ]
+};
+
+/**
  * All available bird songs
  */
 export const birdSongs: BirdSong[] = [
   simpleSparrow,
   melodicNightingale,
   rhythmicWoodpecker,
-  cascadingFinch
+  cascadingFinch,
+  realFinch
 ];
