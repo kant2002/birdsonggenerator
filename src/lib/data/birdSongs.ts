@@ -263,7 +263,7 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'a',
-      notes: [Syllables.a], // Pause on the landing note
+      notes: [Syllables.a, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'a', weight: 0.31 },
         { targetNodeId: 'b', weight: 0.69 },
@@ -271,7 +271,7 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'b',
-      notes: [Syllables.b], // Trill pattern
+      notes: [Syllables.b, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'a', weight: 0.10 },
         { targetNodeId: 'c', weight: 0.90 },
@@ -279,7 +279,7 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'c',
-      notes: [Syllables.c], // Note-rest-note
+      notes: [Syllables.c, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'd', weight: 0.65 },
         { targetNodeId: 'f', weight: 0.35 },
@@ -287,14 +287,14 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'd',
-      notes: [Syllables.d], // Ascending to high finish
+      notes: [Syllables.d, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'e', weight: 1 },
       ]
     },
     {
       id: 'e',
-      notes: [Syllables.e], // Ascending to high finish
+      notes: [Syllables.e, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'a', weight: 0.28 },
         { targetNodeId: 'c', weight: 0.37 },
@@ -303,7 +303,7 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'f',
-      notes: [Syllables.f], // Ascending to high finish
+      notes: [Syllables.f, note(REST, 0.13)],
       transitions: [
         { targetNodeId: 'a', weight: 0.11 },
         { targetNodeId: 'b', weight: 0.39 },
@@ -312,18 +312,36 @@ const bengaleseFinch: BirdSong = {
     },
     {
       id: 'g',
-      notes: [Syllables.g], // Ascending to high finish
+      notes: [Syllables.g, note(REST, 0.02)],
       transitions: [
         { targetNodeId: 'f', weight: 1 },
       ]
     },
     {
       id: 'i',
-      notes: [Syllables.i], // Ascending to high finish
+      notes: [Syllables.i, note(REST, 0.1)],
+      transitions: [
+        { targetNodeId: 'i', weight: 0.08 },
+        { targetNodeId: 'a', weight: 0.45 },
+        { targetNodeId: 'i_2', weight: 0.38 },
+        { targetNodeId: 'i_3', weight: 0.06 },
+      ]
+    },
+    {
+      id: 'i_2',
+      notes: [note(REST, 0.1)],
       transitions: [
         { targetNodeId: 'i', weight: 0.52 },
         { targetNodeId: 'a', weight: 0.45 },
-      ]
+      ] // End
+    },
+    {
+      id: 'i_3',
+      notes: [note(REST, 0.5)],
+      transitions: [
+        { targetNodeId: 'i', weight: 0.52 },
+        { targetNodeId: 'a', weight: 0.45 },
+      ] // End
     },
     {
       id: 'end',
