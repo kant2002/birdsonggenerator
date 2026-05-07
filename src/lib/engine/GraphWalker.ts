@@ -8,6 +8,7 @@ export class GraphWalker {
   private currentNode: GraphNode | null = null;
   private isRunning = false;
   private shouldStop = false;
+  private lastSongText = '';
   private maxSteps = 100; // Prevent infinite loops
 
   /**
@@ -29,13 +30,14 @@ export class GraphWalker {
     this.isRunning = true;
     this.shouldStop = false;
     this.currentNode = this.getNodeById(this.song.startNodeId);
+    this.lastSongText = '';
 
     let stepCount = 0;
 
     while (this.currentNode && !this.shouldStop && stepCount < this.maxSteps) {
       // Visit current node
+      this.lastSongText += this.currentNode.id;
       await onNodeVisit(this.currentNode);
-      console.log(this.currentNode);
 
       // Check if we should stop
       if (this.shouldStop) break;
@@ -71,6 +73,10 @@ export class GraphWalker {
     return this.isRunning;
   }
 
+  get lastSong(): string {
+    return this.lastSongText;
+  }
+
   /**
    * Get a node by its ID
    */
@@ -82,7 +88,6 @@ export class GraphWalker {
    * Select the next node using weighted random selection
    */
   private selectNextNode(currentNode: GraphNode): GraphNode | null {
-    console.log(currentNode);
     const transitions = currentNode.transitions;
 
     // No outgoing edges - terminate

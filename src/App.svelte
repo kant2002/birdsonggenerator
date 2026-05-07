@@ -8,6 +8,7 @@
 
   let selectedBird: BirdSong = birdSongs[0];
   let isPlaying = false;
+  let lastSong = '';
   let audioEngine: AudioEngine | null = null;
   let graphWalker: GraphWalker | null = null;
 
@@ -27,6 +28,7 @@
 
       // Start walking the graph
       await graphWalker.start(async (node) => {
+        lastSong = graphWalker!.lastSong;
         if (audioEngine) {
           for (const note of node.notes) {
             await audioEngine.playNote(note);
@@ -66,6 +68,10 @@
         bind:selectedBird
         disabled={isPlaying}
       />
+
+      <p class="last-song">
+        Last song: {lastSong}
+      </p>
 
       <AudioControls
         {isPlaying}
@@ -173,6 +179,10 @@
       opacity: 0.5;
       transform: scale(1.2);
     }
+  }
+
+  .last-song {
+    line-break: anywhere;
   }
 
   footer {

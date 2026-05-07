@@ -251,10 +251,10 @@ const cascadingFinch: BirdSong = {
 const bengaleseFinch: BirdSong = {
   name: 'Bengalese Finch',
   description: 'Structure of the song based on Kentaro Katahira\'s paper',
-  startNodeId: 'start',
+  startNodeId: '',
   nodes: [
     {
-      id: 'start',
+      id: '',
       notes: [note(REST, 0.15)], // Four-note descending run
       transitions: [
         { targetNodeId: 'a', weight: 0.36 },
@@ -323,12 +323,12 @@ const bengaleseFinch: BirdSong = {
       transitions: [
         { targetNodeId: 'i', weight: 0.08 },
         { targetNodeId: 'a', weight: 0.45 },
-        { targetNodeId: 'i_2', weight: 0.38 },
-        { targetNodeId: 'i_3', weight: 0.06 },
+        { targetNodeId: '_2', weight: 0.38 },
+        { targetNodeId: '_3', weight: 0.06 },
       ]
     },
     {
-      id: 'i_2',
+      id: '_2',
       notes: [note(REST, 0.1)],
       transitions: [
         { targetNodeId: 'i', weight: 0.52 },
@@ -336,7 +336,7 @@ const bengaleseFinch: BirdSong = {
       ] // End
     },
     {
-      id: 'i_3',
+      id: '_3',
       notes: [note(REST, 0.5)],
       transitions: [
         { targetNodeId: 'i', weight: 0.52 },
