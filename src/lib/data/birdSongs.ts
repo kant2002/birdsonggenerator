@@ -246,12 +246,11 @@ const cascadingFinch: BirdSong = {
 };
 
 /**
- * Cascading Finch - Demonstrates rich multi-note cascades
- * Features descending runs and complex note sequences
+ * Bengalese finch - Look at https://pmc.ncbi.nlm.nih.gov/articles/PMC3871373/ for graph description
  */
-const realFinch: BirdSong = {
-  name: 'Real Finch',
-  description: 'Flowing cascades of notes in rapid succession',
+const bengaleseFinch: BirdSong = {
+  name: 'Bengalese Finch',
+  description: 'Structure of the song based on Kentaro Katahira\'s paper',
   startNodeId: 'start',
   nodes: [
     {
@@ -313,9 +312,17 @@ const realFinch: BirdSong = {
     },
     {
       id: 'g',
-      notes: [Syllables.i], // Ascending to high finish
+      notes: [Syllables.g], // Ascending to high finish
       transitions: [
         { targetNodeId: 'f', weight: 1 },
+      ]
+    },
+    {
+      id: 'i',
+      notes: [Syllables.i], // Ascending to high finish
+      transitions: [
+        { targetNodeId: 'i', weight: 0.52 },
+        { targetNodeId: 'a', weight: 0.45 },
       ]
     },
     {
@@ -330,9 +337,9 @@ const realFinch: BirdSong = {
  * All available bird songs
  */
 export const birdSongs: BirdSong[] = [
+  bengaleseFinch,
   simpleSparrow,
   melodicNightingale,
   rhythmicWoodpecker,
   cascadingFinch,
-  realFinch
 ];

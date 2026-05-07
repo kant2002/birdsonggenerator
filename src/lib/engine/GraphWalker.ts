@@ -35,6 +35,7 @@ export class GraphWalker {
     while (this.currentNode && !this.shouldStop && stepCount < this.maxSteps) {
       // Visit current node
       await onNodeVisit(this.currentNode);
+      console.log(this.currentNode);
 
       // Check if we should stop
       if (this.shouldStop) break;
@@ -81,6 +82,7 @@ export class GraphWalker {
    * Select the next node using weighted random selection
    */
   private selectNextNode(currentNode: GraphNode): GraphNode | null {
+    console.log(currentNode);
     const transitions = currentNode.transitions;
 
     // No outgoing edges - terminate

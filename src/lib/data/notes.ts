@@ -136,6 +136,7 @@ import cUrl from '../../assets/syllables/c.wav';
 import dUrl from '../../assets/syllables/d.wav';
 import eUrl from '../../assets/syllables/e.wav';
 import fUrl from '../../assets/syllables/f.wav';
+import gUrl from '../../assets/syllables/g.wav';
 import iUrl from '../../assets/syllables/i.wav';
 import sUrl from '../../assets/syllables/s.wav';
 
@@ -152,6 +153,7 @@ export const Syllables = {
   d: { sample: dUrl, frequency: 0, duration: 0 },
   e: { sample: eUrl, frequency: 0, duration: 0 },
   f: { sample: fUrl, frequency: 0, duration: 0 },
+  g: { sample: gUrl, frequency: 0, duration: 0 },
   i: { sample: iUrl, frequency: 0, duration: 0 },
   s: { sample: sUrl, frequency: 0, duration: 0 },
 } as const satisfies Record<string, NoteParams>;
