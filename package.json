@@ -16,7 +16,7 @@
     "svelte": "^5.43.8",
     "svelte-check": "^4.4.8",
     "typescript": "^6.0.3",
-    "vite": "^8.0.11"
+    "vite": "^8.0.16"
   },
   "dependencies": {
     "node-wav": "^0.0.2"
